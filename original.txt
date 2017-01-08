@@ -1,0 +1,14 @@
+If plaintext is stored in a computer file , the
+storage media, the computer and its components, and all backups must
+be secure. Sensitive data is sometimes processed on computers
+whose mass storage is removable, in which case physical security of
+the removed disk is vital. In the case of securing a computer,
+useful (as opposed to handwaving) security must be physical (e.g.,
+against burglary, brazen removal under cover of supposed repair,
+installation of covert monitoring devices, etc.), as well as
+virtual (e.g., operating system modification, illicit network
+access, Trojan programs). Wide availability of keydrives, which can
+plug into most modern computers and store large quantities of data,
+poses another severe security headache. A spy (perhaps posing as
+a cleaning person) could easily conceal one, and even swallow it
+if necessary.
