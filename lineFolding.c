@@ -7,14 +7,14 @@ extern FILE *q;
 int getLine(char *, char);
 void trim(char *);
 
-
 void folding(char c)
 {
     char line[MAXLINE];
     int len;
+
     while((len = getLine(line, c)) > 1) // proceed only if length of line is greater than 1
     {
-        if(len > MAXLEN)
+        if(len > MAXLEN)    // trim/fold the length only if length of line is greater than the MAXLEN.
         {
             trim(line);
         }
@@ -27,7 +27,7 @@ int getLine(char line[], char c)
 {
     int nc = 0;
 
-    while(((c != EOF)) && c != '\n')
+    while(((c != EOF)) && c != '\n')  // store each character in an array.
     {
         line[nc] = c;
         nc++;
