@@ -42,12 +42,12 @@ int getLine(char line[], char c)
 void trim(char line[])
 {
     int i = 0;
-    int lastBlank = 0;
+    int lastBlank = MAXLEN;
     int j = 1;
 
     for(i = 0; line[i] != '\0'; i++)
     {
-        if(line[i] == ' ' || line[i] == '\t')   // kees track of the last whiteSpacing.
+        if(line[i] == ' ' || line[i] == '\t' || line[i] == ',' || line = '.')   // kees track of the last whiteSpacing or non alphabetical character .
         {
             lastBlank = i;
         }
