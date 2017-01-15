@@ -1,3 +1,5 @@
+#include <ctype.h>
+
 #define MAXLEN 65       //length for wrapping
 #define MAXLINE 1000    // maximum length for one line
 
@@ -37,8 +39,7 @@ int getLine(char line[])
         line[nc] = '\n';
 
     line[nc + 1] = '\0';
-
-    return nc;
+    return nc + 1;
 }
 
 void trim(char line[])
@@ -49,7 +50,7 @@ void trim(char line[])
 
     for(i = 0; line[i] != '\0'; i++)
     {
-        if(line[i] == ' ' || line[i] == '\t' || line[i] == '\n' || line[i] == ',' || line[i] == '.')   // kees track of the last white Spacing or non alphabetical character .
+        if(isspace(line[i]))   // kees track of the last white Spacing.
         {
             lastBlank = i;
         }
@@ -61,6 +62,5 @@ void trim(char line[])
         }
     }
 
-    line[i] = '\n';
     line[i + 1] = '\0';
 }
