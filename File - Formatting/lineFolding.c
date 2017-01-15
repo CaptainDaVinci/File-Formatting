@@ -3,18 +3,19 @@
 
 extern FILE *p;
 extern FILE *q;
+extern char c;
 
-int getLine(char *, char);
+int getLine(char *);
 void trim(char *);
 
-void folding(char c)
+void folding(void)
 {
     char line[MAXLINE];
     int len;
 
-    while((len = getLine(line, c)) > 1) // proceed only if length of line is greater than 1
+    while((len = getLine(line)) > 1) // proceed only if length of line is greater than 1
     {
-        if(len > MAXLEN)    // trim/fold the length only if length of line is greater than the MAXLEN.
+        if(len > MAXLEN)    // fold the length only if length of line is greater than the MAXLEN.
         {
             trim(line);
         }
@@ -23,18 +24,19 @@ void folding(char c)
 
 }
 
-int getLine(char line[], char c)
+int getLine(char line[])
 {
     int nc = 0;
-
-    while(((c != EOF)) && c != '\n')  // store each character in an array.
+    while(((c != EOF)) && c != '\n')  // store each character of a line in an array.
     {
         line[nc] = c;
         nc++;
         c = getc(p);
     }
+    if(c == '\n')
+        line[nc] = '\n';
 
-    line[nc] = '\0';    //all characters of the file are stored in an array
+    line[nc + 1] = '\0';
 
     return nc;
 }
@@ -42,12 +44,12 @@ int getLine(char line[], char c)
 void trim(char line[])
 {
     int i = 0;
-    int lastBlank = MAXLEN;
+    int lastBlank = 0;
     int j = 1;
 
     for(i = 0; line[i] != '\0'; i++)
     {
-        if(line[i] == ' ' || line[i] == '\t' || line[i] == ',' || line = '.')   // kees track of the last whiteSpacing or non alphabetical character .
+        if(line[i] == ' ' || line[i] == '\t' || line[i] == '\n' || line[i] == ',' || line[i] == '.')   // kees track of the last white Spacing or non alphabetical character .
         {
             lastBlank = i;
         }

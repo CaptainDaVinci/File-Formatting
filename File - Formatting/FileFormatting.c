@@ -5,29 +5,52 @@
 
 FILE *p;
 FILE *q;
+char c;
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    char c;
-    p = fopen("original.txt", "r");      //original file containing input
-    q = fopen("formatted.txt", "w");     // file which will contain formatted output
-
-    if(p == NULL || q == NULL)
+    if(argc != 2)
     {
-        printf("ERROR! Unable to open file\n"); // exit out of the program if file does not exist.
-        exit(1);
+        printf("Error! Check number of arguements.\n");
+        exit(-1);
     }
 
-    while((c = getc(p)) != EOF)
+    p = fopen(argv[1], "r");                //original file containing input
+    q = fopen("temporary.txt", "w");
+
+    if(p == NULL || q == NULL)          //error checking, also asks user if file is to be created.
     {
-        folding(c);
+        printf("ERROR! Unable to open file\nDo you want to create '%s' file ? (y/n)\n", argv[1]);
+        c = getchar();
+
+        if(c == 'y' || c == 'Y')
+        {
+            p = fopen(argv[1], "w+");
+            printf("Type here to write to the file\n");
+
+            while((c = getchar()) != EOF)
+            {
+                putc(c, p);
+            }
+            fclose(p);
+
+            p = fopen(argv[1], "r");
+        }
+
+        else
+            exit(1);
+    }
+
+    while((c = getc(p)) != EOF)   // for line wrapping
+    {
+        folding();
     }
 
     fclose(p);
     fclose(q);
 
-    p = fopen("formatted.txt", "r");  // this results in output given to the original file itself
-    q = fopen("original.txt", "w");
+    p = fopen("temporary.txt", "r");  // original file will be overwritten
+    q = fopen(argv[1], "w");
 
     if(p == NULL || q == NULL)
     {
@@ -35,11 +58,14 @@ int main(void)
         exit(1);
     }
 
-    while((c = getc(p)) != EOF)
+    while((c = getc(p)) != EOF)         //removes trailing spaces/tabs, also replaces two or more white space by a single space.
     {
-        whiteSpacing(c);
+        whiteSpacing();
     }
 
+    remove("temporary.txt");
+
+    printf("Text in \"%s\" was formatted and overwritten.\n", argv[1]);
     fclose(p);
     fclose(q);
 
