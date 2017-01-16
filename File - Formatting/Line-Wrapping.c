@@ -20,7 +20,6 @@ void lineWrapping(FILE *infile, FILE *outfile)
         }
 
         whiteSpacing(infile, outfile, line, len);
-        //fprintf(outfile, "%s", line);
     }
 
 }
@@ -34,8 +33,12 @@ int getLine(FILE *infile, FILE *outfile, char line[])
         nc++;
         c = getc(infile);
     }
+    
     if(c == '\n')
+    {
         line[nc] = '\n';
+        c = getc(infile);
+    }
 
     line[nc + 1] = '\0';
     return nc + 1;
