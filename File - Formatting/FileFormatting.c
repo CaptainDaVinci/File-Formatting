@@ -1,73 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "whiteSpacing.c"
-#include "lineFolding.c"
+#include <string.h>
+#include "formatting.h"
 
-FILE *p;
-FILE *q;
 char c;
 
 int main(int argc, char *argv[])
 {
-    if(argc != 2)
+    if(argc != 3)
     {
-        printf("Error! Check number of arguements.\n");
+        printf("Usage : %s Input-filename Output-filename\n", argv[0]);
         exit(-1);
     }
 
-    p = fopen(argv[1], "r");                //original file containing input
-    q = fopen("temporary.txt", "w");
+    FILE *infile = fopen(argv[1], "r");                //original file containing input
+    FILE *outfile = fopen(argv[2], "w");
 
-    if(p == NULL || q == NULL)          //error checking, also asks user if file is to be created.
+    if(infile == NULL || outfile == NULL)          //error checking, also asks user if file is to be created.
     {
-        printf("ERROR! Unable to open file\nDo you want to create '%s' file ? (y/n)\n", argv[1]);
-        c = getchar();
+        printf("Unable to open file %s\n", argv[1]);
+        printf("Do you want to create '%s' file ? (y/n)\n", argv[1]);
 
+        c = getchar();
         if(c == 'y' || c == 'Y')
         {
-            p = fopen(argv[1], "w+");
+            infile = fopen(argv[1], "w+");
             printf("Type here to write to the file\n");
 
             while((c = getchar()) != EOF)
             {
-                putc(c, p);
+                putc(c, infile);
             }
-            fclose(p);
+            fclose(infile);
 
-            p = fopen(argv[1], "r");
+            infile = fopen(argv[1], "r");
         }
 
         else
+        {
+            fclose(outfile);
+            remove(argv[2]);
             exit(1);
+        }
     }
 
-    while((c = getc(p)) != EOF)   // for line wrapping
+    while((c = getc(infile)) != EOF)   // for line wrapping
     {
-        folding();
+        lineWrapping(infile, outfile);
     }
 
-    fclose(p);
-    fclose(q);
+    fclose(infile);
+    fclose(outfile);
 
-    p = fopen("temporary.txt", "r");  // original file will be overwritten
-    q = fopen(argv[1], "w");
-
-    if(p == NULL || q == NULL)
-    {
-        printf("ERROR! Unable to open file\n");
-        exit(1);
-    }
-
-    while((c = getc(p)) != EOF)         //removes trailing spaces/tabs, also replaces two or more white space by a single space.
-    {
-        whiteSpacing();
-    }
-
-    remove("temporary.txt");
-
-    printf("Text in \"%s\" was formatted and overwritten.\n", argv[1]);
-    fclose(p);
-    fclose(q);
-
-    return 0;
+    printf("'%s'  was formatted to  '%s'.\n", argv[1], argv[2]);
 }

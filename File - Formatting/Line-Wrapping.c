@@ -2,38 +2,37 @@
 
 #define MAXLEN 65       //length for wrapping
 #define MAXLINE 1000    // maximum length for one line
-
-extern FILE *p;
-extern FILE *q;
 extern char c;
 
-int getLine(char *);
-void trim(char *);
+int getLine(FILE *, FILE *, char *);
+void wrap(char *);
 
-void folding(void)
+void lineWrapping(FILE *infile, FILE *outfile)
 {
     char line[MAXLINE];
     int len;
 
-    while((len = getLine(line)) > 1) // proceed only if length of line is greater than 1
+    while((len = getLine(infile, outfile, line)) > 1) // proceed only if length of line is greater than 1
     {
         if(len > MAXLEN)    // fold the length only if length of line is greater than the MAXLEN.
         {
-            trim(line);
+            wrap(line);
         }
-        fprintf(q, "%s", line);
+
+        whiteSpacing(infile, outfile, line, len);
+        //fprintf(outfile, "%s", line);
     }
 
 }
 
-int getLine(char line[])
+int getLine(FILE *infile, FILE *outfile, char line[])
 {
     int nc = 0;
-    while(((c != EOF)) && c != '\n')  // store each character of a line in an array.
+    while(((c != EOF)) && c != '\n' && nc < MAXLINE - 2)  // store each character of a line in an array.
     {
         line[nc] = c;
         nc++;
-        c = getc(p);
+        c = getc(infile);
     }
     if(c == '\n')
         line[nc] = '\n';
@@ -42,7 +41,7 @@ int getLine(char line[])
     return nc + 1;
 }
 
-void trim(char line[])
+void wrap(char line[])
 {
     int i = 0;
     int lastBlank = 0;
