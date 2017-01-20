@@ -13,13 +13,15 @@ int main(int argc, char *argv[])
         exit(-1);
     }
 
-    FILE *infile = fopen(argv[1], "r");               //original file containing input
+    //original file containing input
+    FILE *infile = fopen(argv[1], "r");
     FILE *outfile = fopen(argv[2], "w");
 
-    if(infile == NULL || outfile == NULL)          //error checking, also asks user if file is to be created.
+    //error checking, also asks user if file is to be created.
+    if(infile == NULL || outfile == NULL)
     {
         printf("Unable to open file %s\n", argv[1]);
-        printf("Do you want to create '%s' file ? (y/n)\n", argv[1]);
+        printf("Do you want to create '%s' file ? (Y/N)\n", argv[1]);
 
         c = getchar();
         if(c == 'y' || c == 'Y')
@@ -44,7 +46,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    while((c = getc(infile)) != EOF)   // for line wrapping
+    while((c = getc(infile)) != EOF)
     {
         lineWrapping(infile, outfile);
     }
@@ -52,5 +54,14 @@ int main(int argc, char *argv[])
     fclose(infile);
     fclose(outfile);
 
-    printf("'%s'  was formatted to  '%s'.\n", argv[1], argv[2]);
+    printf("\n%s  was formatted to %s\n", argv[1], argv[2]);
+
+    printf("\nEnable Stats For Nerds ? (Y/N)\n");
+    c = getchar();
+    if(c == 'y' || c == 'Y')
+    {
+        outfile = fopen(argv[2], "r");
+        stats(outfile);
+        fclose(outfile);
+    }
 }
