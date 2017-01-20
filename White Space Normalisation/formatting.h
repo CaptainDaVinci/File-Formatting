@@ -1,5 +1,7 @@
 #include "White-Spacing.c"
 #include "Line-Wrapping.c"
+#include "statistics.c"
 
-void whiteSpacing(FILE *infile, FILE *outfile, char *, int);
-void lineFolding(FILE *infile, FILE *outfile);
+void whiteSpacing(FILE *, char *, int);
+void lineFolding(FILE *, FILE *);
+void stats(FILE *);
