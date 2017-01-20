@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "White-Spacing.c"
 #include "Line-Wrapping.c"
 
