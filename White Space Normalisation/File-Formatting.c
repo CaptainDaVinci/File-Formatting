@@ -21,14 +21,15 @@ int main(int argc, char *argv[])
     if(infile == NULL || outfile == NULL)
     {
         printf("Unable to open file %s\n", argv[1]);
-        printf("Do you want to create '%s' file ? (Y/N)\n", argv[1]);
+        printf("Do you want to create %s file ? (Y/N)\n", argv[1]);
 
         c = getchar();
         if(c == 'y' || c == 'Y')
         {
-            infile = fopen(argv[1], "w+");
+            infile = fopen(argv[1], "w");
             printf("Type here to write to the file\n");
 
+            c = getchar();
             while((c = getchar()) != EOF)
             {
                 putc(c, infile);
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
             exit(1);
         }
     }
-
+    
     while((c = getc(infile)) != EOF)
     {
         lineWrapping(infile, outfile);

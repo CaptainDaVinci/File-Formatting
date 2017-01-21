@@ -1,31 +1,53 @@
 #include <stdio.h>
+#include <ctype.h>
 
 #define MAXWORD 15
-#define VOWELS 'a' || 'e' || 'i' || 'o' || 'u' || 'A' || 'E' || 'I' || 'O' || 'U'
+#define VOWELS(c) ((c == 'a') || (c == 'e') || (c == 'i') || (c == 'o') || (c == 'u'))
+#define PUNCTUATION(c) ((c != ' ') && (c != '\n') && (c != '\t') && (c != '.') && (c != ',') && (c != '!'))
 
 void histogram(int []);
 int highestWordLen(int []);
+int countWords(int []);
+void resetWord(char []);
 
 void stats(FILE *outfile)
 {
-    int  nc, i, lines, wordLength, vowels;
+    int nc, i, lines, wordLength, vowels;
     int wordLen[MAXWORD];
+    char word[MAXWORD], longestWord[MAXWORD];
     lines = nc  = wordLength = vowels = 0;
+    longestWord[1] = '\0';
 
-    for(i = 1; i < MAXWORD; i++)
+    for(i = 1; i <= MAXWORD; i++)
         wordLen[i] = 0;
+
 
     while((c = getc(outfile)) != EOF)
     {
-        while(c != ' ' && c != '\n' && c != '\t')
+        i = 0;
+
+        // calculates the length of each word.
+        while(PUNCTUATION(c))
         {
+            word[i] = c;
             nc++;
             wordLength++;
+            i++;
 
-            if(c == VOWELS)
+            if(VOWELS(tolower(c)))
                 vowels++;
 
             c = getc(outfile);
+        }
+
+        word[i] = '\0';
+
+        //  stores the longest word in the file
+        if(strlen(word) > strlen(longestWord))
+        {
+            resetWord(longestWord);
+            strcpy(longestWord, word);
+            resetWord(word);
         }
 
         if(c == '\n')
@@ -38,10 +60,8 @@ void stats(FILE *outfile)
 
     histogram(wordLen);
 
-    printf("\n\n\tCHARACTERS   - %3d", nc);
-    printf("\n\tLINES        - %-3d", lines);
-    printf("\n\tVOWELS       - %-3d", vowels);
-    printf("\n\tLONGEST WORD - %d\n\n", highestWordLen(wordLen));
+    printf("\n\nCharacters\tLines\tWords\tVowels\t Longest Word\n");
+    printf(" %d\t\t %d\t %d\t %d\t '%s'\n", nc, lines, countWords(wordLen), vowels, longestWord);
 }
 
 void histogram(int wordLen[])
@@ -49,12 +69,13 @@ void histogram(int wordLen[])
     int i, j;
     printf("\n\nLength of a word VS Number of words\n");
 
-    for(i = 1; i < MAXWORD; i++)
+    // creates a histogram of length of a word vs numbers of words of given length.
+    for(i = 1; i <= MAXWORD; i++)
     {
         printf("\n%2d | ", i);
         for(int j = 0; j < wordLen[i]; j++)
         {
-            printf(" *");
+            printf("* ");
         }
     }
 }
@@ -67,8 +88,28 @@ int highestWordLen(int wordLen[])
     for(i = 1; i < MAXWORD; i++)
     {
         if(wordLen[i] > highest)
-            highest = wordLen[i];
+            highest = i;
     }
 
     return highest;
+}
+
+int countWords(int wordLen[])
+{
+    int count = 0;
+
+    for(int i = 1; i < MAXWORD; i++)
+    {
+        count += wordLen[i];
+    }
+
+    return count;
+}
+
+void resetWord(char word[])
+{
+    for(int i = 0; i < MAXWORD; i++)
+    {
+        word[i] = ' ';
+    }
 }
