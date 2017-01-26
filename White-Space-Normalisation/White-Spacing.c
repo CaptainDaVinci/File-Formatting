@@ -1,4 +1,3 @@
-#include <ctype.h>
 
 extern char c;
 

@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <ctype.h>
 
 #define MAXWORD 15
 #define VOWELS(c) ((c == 'a') || (c == 'e') || (c == 'i') || (c == 'o') || (c == 'u'))

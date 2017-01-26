@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "formatting.h"
 
 char c;
@@ -26,6 +27,7 @@ int main(int argc, char *argv[])
         c = getchar();
         if(c == 'y' || c == 'Y')
         {
+            system("clear");
             infile = fopen(argv[1], "w");
             printf("Type here to write to the file\n");
 
@@ -46,7 +48,7 @@ int main(int argc, char *argv[])
             exit(1);
         }
     }
-    
+
     while((c = getc(infile)) != EOF)
     {
         lineWrapping(infile, outfile);
@@ -61,6 +63,7 @@ int main(int argc, char *argv[])
     c = getchar();
     if(c == 'y' || c == 'Y')
     {
+        system("clear");
         outfile = fopen(argv[2], "r");
         stats(outfile);
         fclose(outfile);
