@@ -1,4 +1,3 @@
-
 extern char c;
 
 // replaces one or more blank spaces by a single space

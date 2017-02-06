@@ -1,5 +1,0 @@
-Hello word!
-My name is Yash M Kothari, I am currently studying at University of Vesvesvaraya college of engineering. 
-My course in Computer Science and Engineering, first semester.
-Projects done so far include file formatting, sudoku solver.
-Thank You!

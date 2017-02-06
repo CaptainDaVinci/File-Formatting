@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "formatting.h"
+#include "Formatting.h"
 
 char c;
 

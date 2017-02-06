@@ -1,4 +1,3 @@
-
 #define MAXWORD 15
 #define VOWELS(c) ((c == 'a') || (c == 'e') || (c == 'i') || (c == 'o') || (c == 'u'))
 #define PUNCTUATION(c) ((c != ' ') && (c != '\n') && (c != '\t') && (c != '.') && (c != ',') && (c != '!'))

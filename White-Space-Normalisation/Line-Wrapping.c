@@ -1,4 +1,3 @@
-
 #define MAXLEN 65       //length for wrapping
 #define MAXLINE 1000    // maximum length for one line
 extern char c;
