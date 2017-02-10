@@ -2,8 +2,8 @@
 #define MAXLINE 1000    // maximum length for one line
 extern char c;
 
-int getLine(FILE *, FILE *, char *);
-void wrap(char *);
+int getLine(FILE *infile, FILE *outfile, char *line);
+void wrap(char *line);
 
 void lineWrapping(FILE *infile, FILE *outfile)
 {
