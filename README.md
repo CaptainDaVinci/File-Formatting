@@ -1,12 +1,12 @@
 # File-Formatting
 A simple C program that takes input as text from a file, removes trailing and unnecessary blank spaces and also wraps the line after a given length.
 
-# Usage
+## Usage
 compile and run the main.c file as follows :
 
-$ gcc main.c -o format
+`$ gcc main.c -o format
 
-$ ./format in.txt out.txt
+$ ./format in.txt out.txt`
 
 Here, "in.txt" is the example input file, and "out.txt" is the output file after formatting. Notice, in "in.txt" the text is widespread and not formatted properly.
 
