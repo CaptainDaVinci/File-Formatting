@@ -4,9 +4,24 @@ A simple C program that takes input as text from a file, removes trailing and un
 ## USAGE
 compile and run the _main.c_ file as follows :
 ```
-$ gcc main.c White-Spacing.c Statistics.c -o format
-$ ./format in.txt out.txt
+$ gcc main.c White-Spacing.c Statistics.c pattern-matching.c -o format
 ```
+### To format the a file.
+```
+$ ./format <Input file-name> <Output file-name>
+$ ./format in.txt out.txt       // in this case.
+```
+### To find a particluar pattern in a file.
+```
+$ ./format <file-name> find <string>
+$ ./format in.txt Programming      // in this case.
+```
+### To view the statistics of a file.
+```
+$ ./format <file-name> stats
+$ ./format in.txt stats      // in this case.
+```
+
 Here, "_in.txt_" is the example input file, and "_out.txt_" is the output file after formatting. Notice, in "_in.txt_" the text is widespread and not formatted properly.
 
 After, compiling and running the code you will be asked if you would like to view the stats such as number of words, vowels, lines and also the longest word.
