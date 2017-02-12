@@ -32,6 +32,7 @@ void lineWrapping(FILE *infile, FILE *outfile)
 
 int getLine(FILE *infile, FILE *outfile, char line[])
 {
+    char c;
     int nc = 0;
 
     // store each character of a line in an array.
