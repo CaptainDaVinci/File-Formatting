@@ -4,13 +4,11 @@
 #include <ctype.h>
 #include "Formatting.h"
 
-char c;
-
 int main(int argc, char *argv[])
 {
     if(argc !=  3)
     {
-        printf("Usage : %s Input-filename Output-filename\n", argv[0]);
+        printf("Usage: %s Input-filename Output-filename\n", argv[0]);
         exit(-1);
     }
 
@@ -36,8 +34,8 @@ int main(int argc, char *argv[])
             {
                 putc(c, infile);
             }
-            fclose(infile);
 
+            fclose(infile);
             infile = fopen(argv[1], "r");
         }
 
@@ -58,8 +56,8 @@ int main(int argc, char *argv[])
     fclose(outfile);
 
     printf("\n%s  was formatted to %s\n", argv[1], argv[2]);
-
     printf("\nEnable Stats For Nerds ? (Y/N)\n");
+
     c = getchar();
     if(c == 'y' || c == 'Y')
     {

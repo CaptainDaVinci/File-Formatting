@@ -4,7 +4,7 @@ A simple C program that takes input as text from a file, removes trailing and un
 ## USAGE
 compile and run the _main.c_ file as follows :
 ```
-$ gcc main.c -o format
+$ gcc main.c White-Spacing.c Statistics.c -o format
 $ ./format in.txt out.txt
 ```
 Here, "_in.txt_" is the example input file, and "_out.txt_" is the output file after formatting. Notice, in "_in.txt_" the text is widespread and not formatted properly.

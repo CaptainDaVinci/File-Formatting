@@ -1,8 +1,14 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include "Formatting.h"
+
 #define MAXLEN 65       //length for wrapping
 #define MAXLINE 1000    // maximum length for one line
-extern char c;
+
 
 int getLine(FILE *infile, FILE *outfile, char *line);
+void whiteSpacing(FILE *outfile, char *line, int length);
 void wrap(char *line);
 
 void lineWrapping(FILE *infile, FILE *outfile)
@@ -69,4 +75,21 @@ void wrap(char line[])
     }
 
     line[i + 1] = '\0';
+}
+
+// replaces one or more blank spaces by a single space
+void whiteSpacing(FILE *outfile, char *line, int len)
+{
+    int i;
+    for(i = 0; i < len; i++)
+    {
+        while(isblank(line[i]))
+        {
+            i++;
+            if(!(isblank(line[i])) && line[i] != EOF)
+                    putc(' ', outfile);
+        }
+
+        putc(line[i], outfile);
+    }
 }
