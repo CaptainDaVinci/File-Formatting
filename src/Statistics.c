@@ -13,6 +13,7 @@ int countWords(int []);
 
 void stats(FILE *outfile)
 {
+    char c;
     int nc, i;
     int lines, wordLen, vowels;
     int *words = calloc(MAXWORD, sizeof(*words));
