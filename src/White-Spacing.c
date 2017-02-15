@@ -21,9 +21,7 @@ void lineWrapping(FILE *infile, FILE *outfile)
     {
         // wrap the line only if length of line is greater than the MAXLEN.
         if(len > MAXLEN)
-        {
             wrap(line);
-        }
 
         whiteSpacing(outfile, line, len);
     }
@@ -36,21 +34,15 @@ int getLine(FILE *infile, FILE *outfile, char line[])
     int nc = 0;
 
     // store each character of a line in an array.
-    while(((c != EOF)) && c != '\n' && nc < MAXLINE - 2)
-    {
-        line[nc] = c;
-        nc++;
-        c = getc(infile);
-    }
+    while(((c = getc(infile)) != EOF) && c != '\n' && nc < MAXLINE - 2)
+        line[nc++] = c;
 
     if(c == '\n')
-    {
-        line[nc] = '\n';
-        c = getc(infile);
-    }
+        line[nc++] = '\n';
 
-    line[nc + 1] = '\0';
-    return nc + 1;
+    line[nc] = '\0';
+
+    return nc;
 }
 
 void wrap(char line[])
@@ -63,9 +55,7 @@ void wrap(char line[])
     {
         // kees track of the last white Spacing.
         if(isspace(line[i]))
-        {
             lastBlank = i;
-        }
 
         // kees track of the last white Spacing.
         if(i == MAXLEN * j)

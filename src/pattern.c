@@ -8,8 +8,6 @@ int getNewLine(FILE *infile, char *line);
 
 void matchPattern(FILE *infile, char *pattern)
 {
-    int i, j;
-    int len = strlen(pattern);
     char line[MAXLINE];
 
     while(getNewLine(infile, line) > 0)

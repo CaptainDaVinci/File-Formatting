@@ -70,7 +70,7 @@ void histogram(int words[])
     for(i = 1; i <= MAXWORD; i++)
     {
         printf("\n%2d | ", i);
-        for(int j = 0; j < words[i]; j++)
+        for(j = 0; j < words[i]; j++)
         {
             printf("* ");
         }

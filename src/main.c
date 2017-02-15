@@ -12,13 +12,14 @@ int main(int argc, char *argv[])
 
     if(argc !=  3 && argc != 4)
     {
-        printf("Usage: %s <Input-filename> <Output-filename>\n\tOr\n", argv[0]);
-        printf("Usage: %s <file-name> find <string>\n\tOr\n", argv[0]);
+        printf("Usage: %s <Input-filename> <Output-filename>\n", argv[0]);
+        printf("Usage: %s <file-name> find <string>\n", argv[0]);
         printf("Usage: %s <file-name> stats\n", argv[0]);
 
         exit(-1);
     }
 
+    // for pattern matching.
     if(strcmp(argv[2], "find") == 0)
     {
         infile = fopen(argv[1], "r");
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    // for displaying statistics.
     if(strcmp(argv[2], "stats") == 0)
     {
         infile = fopen(argv[1], "r");
