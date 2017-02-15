@@ -3,20 +3,32 @@ A simple C program that takes input as text from a file, removes trailing and un
 
 ## USAGE
 compile and run the _main.c_ file as follows :
+
+### LINUX
+First change the permission for _build.sh_ file.
 ```
-$ gcc main.c White-Spacing.c Statistics.c pattern-matching.c -o format
+$ chmod +x build.sh
+$ ./build.sh
 ```
-### To format a file.
+
+###WINDOWS
+Compile the program as follows:
+```
+$ gcc main.c White-Spacing.c Statistics.c pattern.c -o format
+```
+
+###TO RUN THE FILE
+* To format a file.
 ```
 $ ./format <Input file-name>  <Output file-name>
 $ ./format in.txt out.txt           // in this case.
 ```
-### To find a particluar pattern in a file.
+* To find a particluar pattern in a file.
 ```
 $ ./format <file-name> find <string>
 $ ./format in.txt Programming       // in this case.
 ```
-### To view the statistics of a file.
+* To view the statistics of a file.
 ```
 $ ./format <file-name> stats
 $ ./format in.txt stats             // in this case.
