@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include "Formatting.h"
 
 #define MAXLEN 65       //length for wrapping
 #define MAXLINE 1000    // maximum length for one line
